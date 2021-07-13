@@ -1,0 +1,148 @@
+:root {
+  --main-bg-color: #f2f2f4;
+  --light-grey: #acabb1;
+  --dark-grey: #535356;
+  --purple-color: #6540DB;
+  --pink-color: #E15A93;
+  --orange-color: #FF8A00;
+  --green-color: #48bda2;
+  --shadow: rgba(0, 0, 0, 0.112);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-decoration: none;
+}
+
+body {
+  width: 60%;
+  margin: 0 auto;
+  color: var(--dark-grey)
+}
+
+h1 {
+  font-weight: 600;
+}
+
+.date {
+  color: var(--light-grey);
+}
+
+header {
+  margin: 3rem 0;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.baseline {
+  align-items: baseline;
+}
+
+.divisor {
+  border-bottom: 1px solid var(--shadow);
+  margin-top: 1rem;
+}
+
+.add-task {
+  display: flex;
+}
+
+.bt-add-task, .delete-task {
+  border-radius: 0 .4rem .4rem 0;
+}
+
+#task-input, .timer {
+  border-radius: .4rem 0 0 .4rem;
+}
+
+.bt-add-task {
+  flex: 30%;
+  justify-content: center;
+  padding: 0 1rem;
+  background-color: var(--purple-color);
+  border: 1px solid var(--purple-color);
+  color: var(--main-bg-color);
+  cursor: pointer;
+}
+
+#task-input[type=text] {
+  border: 1px solid var(--shadow);
+  background-color: var(--main-bg-color);
+  color: var(--dark-grey);
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+#task-input[type=text]:focus {
+  outline: none;
+  border: 1px solid var(--purple-color);
+}
+
+input[type="checkbox"] {
+  border: 1px solid var(--dark-grey);
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  filter: grayscale();
+}
+
+.task {
+  border-radius: .6rem;
+  justify-content: space-between;
+  background-color: white;
+  color: var(--dark-grey);
+  box-shadow: 0 0 12px var(--shadow);
+  margin-bottom: 1.2rem;
+  cursor: move;
+}
+
+.delete-task, .timer {
+  border-left: 1px solid var(--main-bg-color);
+  border-right: 1px solid var(--main-bg-color);
+  padding: 1rem 1rem;
+}
+
+.delete-task {
+  cursor: pointer;
+}
+
+.task-priority {
+  background-color: var(--main-bg-color);
+  color: var(--light-grey);
+  text-transform: uppercase;
+  font-size: .7rem;
+  padding: .3rem 1rem;
+  width: fit-content;
+  margin-bottom: .5rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.important, .urgent {
+  color: white;
+}
+
+.important {
+  background-color: var(--orange-color);
+}
+
+.urgent {
+  background-color: var(--pink-color);
+}
+
+.done {
+  text-decoration: line-through;
+  border: 2px solid var(--green-color);
+}
