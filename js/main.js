@@ -105,7 +105,12 @@ function createTimer () {
   play.setAttribute('src', './img/play.svg');
   play.setAttribute('alt', 'timer');
   play.setAttribute('height', '30px');
+  play.className = 'play';
+  const clock = document.createElement('p');
+  clock.className = 'clock';
+  clock.innerText = '00:25:00';
   timer.appendChild(play);
+  timer.appendChild(clock);
   return timer;
 }
 
@@ -216,10 +221,11 @@ changeUrgentBg();
 function taskDone () {
   document.addEventListener('click', (e) => {
     const item = e.target;
+    const taskContainer = item.parentElement.parentElement.parentElement;
     if (item.id === 'done') {
       item.checked
-        ? item.parentElement.parentElement.parentElement.classList.add('done')
-        : item.parentElement.parentElement.parentElement.classList.remove('done')
+      ? taskContainer.classList.add('done')
+      : taskContainer.classList.remove('done');
     }
     saveTasks();
   });
@@ -289,3 +295,39 @@ function dragAndDropTask() {
     });
 }
 dragAndDropTask();
+
+//POMODORO TIMER
+function getDateInSeconds (value) {
+  const data = new Date(value * 1000);
+  return data.toLocaleTimeString('pt-BR', {
+    hour12: false,
+    timeZone: 'UTC'
+  });
+}
+
+function focusTimer() {
+  const buttons = document.querySelectorAll('.play');
+  buttons.forEach((bt) => {
+    let timer;
+    bt.addEventListener('click', () => {
+      function startClock (clock) {
+        let seconds = 25 * 60;
+        timer = setInterval(() => {
+          seconds--;
+          clock.innerHTML = getDateInSeconds(seconds);
+        }, 1000);
+      }
+      if(bt.classList.contains('play')) {
+        clearInterval(timer);
+        startClock(bt.nextSibling);
+        bt.setAttribute('src', './img/pause.svg');
+        bt.classList.remove('play');
+      } else {
+        clearInterval(timer);
+        bt.classList.add('play');
+        bt.setAttribute('src', './img/play.svg');
+      }
+    });
+  });
+}
+focusTimer();

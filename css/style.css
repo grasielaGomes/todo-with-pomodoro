@@ -34,7 +34,7 @@ header {
   margin: 3rem 0;
 }
 
-.flex-container {
+.flex-container, .timer {
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -114,8 +114,12 @@ input[type="checkbox"] {
   padding: 1rem 1rem;
 }
 
-.delete-task {
+.delete-task, .play {
   cursor: pointer;
+}
+
+.clock {
+  color: var(--purple-color);
 }
 
 .task-priority {
@@ -143,6 +147,14 @@ input[type="checkbox"] {
 }
 
 .done {
-  text-decoration: line-through;
   border: 2px solid var(--green-color);
+  padding-left: 2rem;
+}
+
+.done h4 {
+  text-decoration: line-through;
+}
+
+.done .timer {
+  display: none;
 }
