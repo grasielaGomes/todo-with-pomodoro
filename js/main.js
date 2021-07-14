@@ -88,11 +88,11 @@ function createPriorityContainer (isUrgent, isImportant) {
   urgent.classList.add('task-priority');
   urgent.id = ('urgent');
   urgent.innerText = 'Urgente';
-  if(isUrgent) urgent.classList.add('urgent');
+  if (isUrgent) urgent.classList.add('urgent');
   important.classList.add('task-priority');
   important.id = ('important');
   important.innerText = 'Importante';
-  if(isImportant) important.classList.add('important');
+  if (isImportant) important.classList.add('important');
   priorityContainer.appendChild(urgent);
   priorityContainer.appendChild(important);
   return priorityContainer;
@@ -116,7 +116,7 @@ function createTaskContent (input, isDone) {
   const checkbox = createInput();
   checkbox.setAttribute('type', 'checkbox');
   checkbox.id = 'done';
-  if(isDone) {
+  if (isDone) {
     checkbox.checked = true;
   }
   content.appendChild(checkbox);
@@ -149,7 +149,7 @@ function createTaskContainer (input, isDone) {
   timerAndTask.appendChild(createTaskContent(input, isDone));
   taskContainer.appendChild(timerAndTask);
   taskContainer.appendChild(createDeleteButton());
-  if(isDone) taskContainer.classList.add('done');
+  if (isDone) taskContainer.classList.add('done');
   return taskContainer;
 }
 
@@ -179,7 +179,7 @@ function addTaskByKeyBoard () {
     if (e.keyCode === 13) {
       if (!taskInput.value) return;
       const tasks = document.querySelector('.tasks');
-      tasks.appendChild(createTaskTemplate());
+      tasks.appendChild(createTaskTemplate(taskInput.value, false, false, false));
       clearInput();
       saveTasks();
     }
@@ -279,3 +279,13 @@ function getTasks () {
   }
 }
 getTasks();
+
+//DRAG AND DROP
+function dragAndDropTask() {
+  const container = document.querySelector('.tasks');
+    container.addEventListener('dragend', (evt) => {
+      container.insertBefore(evt.target, evt.target.previousElementSibling);
+      saveTasks();
+    });
+}
+dragAndDropTask();
