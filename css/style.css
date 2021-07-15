@@ -34,7 +34,7 @@ header {
   margin: 3rem 0;
 }
 
-.flex-container, .timer {
+.flex-container {
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -42,6 +42,10 @@ header {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .baseline {
@@ -61,7 +65,7 @@ header {
   border-radius: 0 .4rem .4rem 0;
 }
 
-#task-input, .timer {
+#task-input, .check {
   border-radius: .4rem 0 0 .4rem;
 }
 
@@ -98,17 +102,26 @@ input[type="checkbox"] {
   filter: grayscale();
 }
 
-.task {
+.task, .alert-container {
   border-radius: .6rem;
+}
+
+.task {
   justify-content: space-between;
   background-color: white;
   color: var(--dark-grey);
   box-shadow: 0 0 12px var(--shadow);
   margin-bottom: 1.2rem;
+  height: fit-content;
   cursor: move;
 }
 
-.delete-task, .timer {
+.alert-container {
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.delete-task, .check {
   border-left: 1px solid var(--main-bg-color);
   border-right: 1px solid var(--main-bg-color);
   padding: 1rem 1rem;
@@ -116,10 +129,6 @@ input[type="checkbox"] {
 
 .delete-task, .play {
   cursor: pointer;
-}
-
-.clock {
-  color: var(--purple-color);
 }
 
 .task-priority {
@@ -146,15 +155,23 @@ input[type="checkbox"] {
   background-color: var(--pink-color);
 }
 
-.done {
+.task-content {
+  flex: 80%;
+}
+
+.done, .alert-container {
   border: 2px solid var(--green-color);
-  padding-left: 2rem;
 }
 
 .done h4 {
   text-decoration: line-through;
 }
 
-.done .timer {
+.alert-container {
   display: none;
+}
+
+.alert-pause {
+  text-align: center;
+  padding: 0 1rem;
 }

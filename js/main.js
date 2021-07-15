@@ -98,33 +98,22 @@ function createPriorityContainer (isUrgent, isImportant) {
   return priorityContainer;
 }
 
-function createTimer () {
-  const timer = createDiv();
-  timer.className = 'timer';
-  const play = createImg();
-  play.setAttribute('src', './img/play.svg');
-  play.setAttribute('alt', 'timer');
-  play.setAttribute('height', '30px');
-  play.className = 'play';
-  const clock = document.createElement('p');
-  clock.className = 'clock';
-  clock.innerText = '00:25:00';
-  timer.appendChild(play);
-  timer.appendChild(clock);
-  return timer;
-}
-
-function createTaskContent (input, isDone) {
-  const content = createDiv();
-  content.className = 'task-content';
-  content.classList.add('flex-container');
+function createCheckbox (isDone) {
+  const check = createDiv();
+  check.className = 'check';
   const checkbox = createInput();
   checkbox.setAttribute('type', 'checkbox');
   checkbox.id = 'done';
   if (isDone) {
     checkbox.checked = true;
   }
-  content.appendChild(checkbox);
+  check.appendChild(checkbox);
+  return check;
+}
+
+function createTaskContent (input) {
+  const content = createDiv();
+  content.className = 'task-content';
   const taskTitle = createH4();
   taskTitle.className = 'task-title';
   taskTitle.innerHTML = input;
@@ -148,11 +137,8 @@ function createTaskContainer (input, isDone) {
   const taskContainer = createDiv();
   taskContainer.className = 'task';
   taskContainer.classList.add('flex-container');
-  const timerAndTask = createDiv();
-  timerAndTask.classList.add('flex-container');
-  timerAndTask.appendChild(createTimer());
-  timerAndTask.appendChild(createTaskContent(input, isDone));
-  taskContainer.appendChild(timerAndTask);
+  taskContainer.appendChild(createCheckbox(isDone));
+  taskContainer.appendChild(createTaskContent(input));
   taskContainer.appendChild(createDeleteButton());
   if (isDone) taskContainer.classList.add('done');
   return taskContainer;
@@ -221,7 +207,7 @@ changeUrgentBg();
 function taskDone () {
   document.addEventListener('click', (e) => {
     const item = e.target;
-    const taskContainer = item.parentElement.parentElement.parentElement;
+    const taskContainer = item.parentElement.parentElement;
     if (item.id === 'done') {
       item.checked
       ? taskContainer.classList.add('done')
@@ -256,7 +242,7 @@ function saveTasks () {
     const urgentTask = priority.children[0];
     const importantTask = priority.children[1];
     const content = item.children[1];
-    const taskTitle = content.children[0].children[1].innerText;
+    const taskTitle = item.querySelector('.task-title').innerText;
     let task = {
       title: '',
       isDone: false,
@@ -305,29 +291,27 @@ function getDateInSeconds (value) {
   });
 }
 
-function focusTimer() {
-  const buttons = document.querySelectorAll('.play');
-  buttons.forEach((bt) => {
-    let timer;
-    bt.addEventListener('click', () => {
-      function startClock (clock) {
-        let seconds = 25 * 60;
-        timer = setInterval(() => {
-          seconds--;
-          clock.innerHTML = getDateInSeconds(seconds);
-        }, 1000);
-      }
-      if(bt.classList.contains('play')) {
-        clearInterval(timer);
-        startClock(bt.nextSibling);
-        bt.setAttribute('src', './img/pause.svg');
-        bt.classList.remove('play');
-      } else {
-        clearInterval(timer);
-        bt.classList.add('play');
-        bt.setAttribute('src', './img/play.svg');
-      }
-    });
-  });
+const timer = document.querySelector('.timer');
+let seconds = 25 * 60;
+let time;
+
+function startClock() {
+  time = setInterval(() => {
+    seconds--;
+    timer.innerHTML = getDateInSeconds(seconds);
+  }, 1000);
 }
-focusTimer();
+
+const play = document.querySelector('.play');
+play.addEventListener('click', () => {
+    if(timer.classList.contains('stoped')) {
+      clearInterval(time);
+      startClock();
+      play.setAttribute('src', './img/pause.svg');
+      timer.classList.remove('stoped');
+    } else {
+      clearInterval(time);
+      timer.classList.add('stoped');
+      play.setAttribute('src', './img/play.svg');
+    }
+  });
