@@ -305,20 +305,6 @@ function startClock() {
   }, 1000);
 }
 
-function stopTimer(value) {
-  if(value === 0) {
-    counter++;
-    clearInterval(time);
-    timer.innerHTML = '00:25:00';
-    seconds = 5;
-    timer.classList.add('stoped');
-    play.setAttribute('src', './img/play.svg');
-    countCicles(counter);
-    console.log(counter);
-    if(counter === 4) counter = 0;
-  }
-}
-
 function countCicles (value) {
   const cicle = document.querySelector('.cicle');
   const minutes = document.querySelector('.pause-minutes');
@@ -332,11 +318,32 @@ function countCicles (value) {
     cicle.innerHTML = `${value} ciclos de foco`;
     minutes.innerHTML = 'de 15 a 30';
     alert.style.display = 'block';
+    
   }
   function disappearAlert () {
     alert.style.display = 'none';
   }
-  window.setTimeout(disappearAlert, 5000)
+  window.setTimeout(disappearAlert, 7000)
+}
+
+function playBip() {
+  const bip = document.querySelector('.bip');
+  return bip.play();
+}
+
+function stopTimer (value) {
+  if (value === 0) {
+    counter++;
+    clearInterval(time);
+    playBip();
+    timer.innerHTML = '00:25:00';
+    seconds = 5;
+    timer.classList.add('stoped');
+    play.setAttribute('src', './img/play.svg');
+    countCicles(counter);
+    console.log(counter);
+    if (counter === 4) counter = 0;
+  }
 }
 
 play.addEventListener('click', () => {
