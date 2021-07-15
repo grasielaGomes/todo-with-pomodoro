@@ -292,17 +292,53 @@ function getDateInSeconds (value) {
 }
 
 const timer = document.querySelector('.timer');
-let seconds = 25 * 60;
+const play = document.querySelector('.play');
+let seconds = 5;
 let time;
+let counter = 0;
 
 function startClock() {
   time = setInterval(() => {
     seconds--;
     timer.innerHTML = getDateInSeconds(seconds);
+    stopTimer(seconds);
   }, 1000);
 }
 
-const play = document.querySelector('.play');
+function stopTimer(value) {
+  if(value === 0) {
+    counter++;
+    clearInterval(time);
+    timer.innerHTML = '00:25:00';
+    seconds = 5;
+    timer.classList.add('stoped');
+    play.setAttribute('src', './img/play.svg');
+    countCicles(counter);
+    console.log(counter);
+    if(counter === 4) counter = 0;
+  }
+}
+
+function countCicles (value) {
+  const cicle = document.querySelector('.cicle');
+  const minutes = document.querySelector('.pause-minutes');
+  const alert = document.querySelector('.alert-container');
+  if(value < 4) {
+    cicle.innerHTML = value > 1 ? `${value} ciclos de foco` : `${value} ciclo de foco`;
+    minutes.innerHTML = 'por 5';
+    alert.style.display = 'block';
+  }
+  if (value === 4) {
+    cicle.innerHTML = `${value} ciclos de foco`;
+    minutes.innerHTML = 'de 15 a 30';
+    alert.style.display = 'block';
+  }
+  function disappearAlert () {
+    alert.style.display = 'none';
+  }
+  window.setTimeout(disappearAlert, 5000)
+}
+
 play.addEventListener('click', () => {
     if(timer.classList.contains('stoped')) {
       clearInterval(time);

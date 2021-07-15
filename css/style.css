@@ -22,8 +22,9 @@ body {
   color: var(--dark-grey)
 }
 
-h1 {
+.title {
   font-weight: 600;
+  font-size: 1.5em;
 }
 
 .date {
@@ -119,6 +120,7 @@ input[type="checkbox"] {
 .alert-container {
   padding: 1rem 0;
   margin-top: 1rem;
+  transition: display 2;
 }
 
 .delete-task, .check {
