@@ -1,6 +1,5 @@
 # Todo with Pomodoro | Project
 
-# Sobre o projeto
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/grasielaGomes/todo-with-pomodoro/blob/master/LICENSE)
 
 # Sobre o projeto
