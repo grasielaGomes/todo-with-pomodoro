@@ -153,14 +153,24 @@ function createTaskTemplate (input, isDone, isUrgent, isImportant) {
   return newItem;
 }
 
+function disappearPomodoro() {
+  const pomodoro = document.querySelector('.pomodoro');
+  const tasks = document.querySelectorAll('.task-item');
+  if(tasks.length > 0) {
+    pomodoro.style.display = 'none';
+  }
+}
+
 function addTask () {
-  const btAddTask = document.querySelector(".bt-add-task");
+  const btAddTask = document.querySelector('.bt-add-task');
+  
   btAddTask.addEventListener('click', () => {
     if (!taskInput.value) return;
     const tasks = document.querySelector('.tasks');
     tasks.appendChild(createTaskTemplate(taskInput.value, false, false, false));
     clearInput();
     saveTasks();
+    disappearPomodoro();
   });
 }
 addTask();
@@ -173,6 +183,7 @@ function addTaskByKeyBoard () {
       tasks.appendChild(createTaskTemplate(taskInput.value, false, false, false));
       clearInput();
       saveTasks();
+      disappearPomodoro();
     }
   });
 }
@@ -267,7 +278,8 @@ function getTasks () {
     taskList.forEach((item) => {
       const tasks = document.querySelector('.tasks');
       tasks.appendChild(createTaskTemplate(item.title, item.isDone, item.isUrgent, item.isImportant));
-    })
+    });
+    disappearPomodoro();
   }
 }
 getTasks();
@@ -293,7 +305,7 @@ function getDateInSeconds (value) {
 
 const timer = document.querySelector('.timer');
 const play = document.querySelector('.play');
-let seconds = 5;
+let seconds = 25 * 60;
 let time;
 let counter = 0;
 
@@ -337,11 +349,10 @@ function stopTimer (value) {
     clearInterval(time);
     playBip();
     timer.innerHTML = '00:25:00';
-    seconds = 5;
+    seconds = 25 * 60;
     timer.classList.add('stoped');
     play.setAttribute('src', './img/play.svg');
     countCicles(counter);
-    console.log(counter);
     if (counter === 4) counter = 0;
   }
 }

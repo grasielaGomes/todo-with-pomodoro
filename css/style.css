@@ -103,7 +103,7 @@ input[type="checkbox"] {
   filter: grayscale();
 }
 
-.task, .alert-container {
+.task, .alert-container, .pomodoro {
   border-radius: .6rem;
 }
 
@@ -172,4 +172,11 @@ input[type="checkbox"] {
 .alert-pause {
   text-align: center;
   padding: 0 1rem;
+}
+
+.pomodoro {
+  border: 1px solid var(--shadow);
+  padding: 2rem 6rem;
+  color: var(--light-grey);
+  line-height: 1.5rem;
 }
