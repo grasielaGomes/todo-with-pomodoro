@@ -103,7 +103,7 @@ input[type="checkbox"] {
   filter: grayscale();
 }
 
-.task, .alert-container, .pomodoro {
+.task, .alert-container, .pomodoro, .badge {
   border-radius: .6rem;
 }
 
