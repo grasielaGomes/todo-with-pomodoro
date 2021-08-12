@@ -266,7 +266,7 @@ function saveTasks () {
     task.isImportant = importantTask.classList.contains('important');
     objects.push(task);
   });
-  localStorage.clear();
+  localStorage.remove('tasks');
   const tasksJSON = JSON.stringify(objects);
   localStorage.setItem('tasks', tasksJSON);
 }
